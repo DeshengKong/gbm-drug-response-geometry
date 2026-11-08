@@ -211,7 +211,7 @@ def fig1():
     ax.set_xlabel("Trajectory quintile (1 = earliest)")
     ax.set_ylabel("Displacement (d$_{traj}$)")
     ax.set_xticks([1, 2, 3, 4, 5])
-    annotate_stats(ax, "Pooled Spearman\n$\\rho$ = \u22120.242, p = 3.6$\\times$10$^{-4}$\nn = 214 quintile obs.\nBlue: mean \u00b1 SEM")
+    annotate_stats(ax, "Comparison level (n = 43)\n$\\rho$ = \u22120.405, p = 0.0071\nPooled (214 quintile rows)\n$\\rho$ = \u22120.242, descriptive")
     panel_letter(ax, "C")
     panel_title(ax, "Direction vs position")
     style_ax(ax)
@@ -239,9 +239,10 @@ def fig1():
     ax.axhline(float(gb["C"].median()), color=RED, lw=1.4, ls="--")
     ax.set_xlim(-0.6, 0.6)
     ax.set_xticks([])
+    ax.set_xlabel("Comparison index (jittered)")
     ax.set_ylabel("Direction C")
     ax.set_ylim(0, 1.0)
-    annotate_stats(ax, "C reproduced exactly\nmedian = 0.608\n43/43 positive", fontsize=7.5)
+    annotate_stats(ax, "C reproduced\nmedian = 0.608\n43/43 positive", fontsize=7.5)
     panel_letter(ax, "E")
     panel_title(ax, "Direction C")
     style_ax(ax)
@@ -289,7 +290,7 @@ def fig2():
     ax.set_xlabel("Trajectory quintile (1 = earliest)")
     ax.set_ylabel("Amplitude (m12)")
     ax.set_xticks([1, 2, 3, 4, 5])
-    annotate_stats(ax, "Pooled Spearman\n$\\rho$ = 0.064, p = 0.35\nn = 214 quintile obs.\nDark: mean \u00b1 SEM")
+    annotate_stats(ax, "Within-comp. $\\rho$ = 0.064, p = 0.35\n(214 quintile rows)\nAcross-comp. $\\rho$ = +0.396\np = 0.0087 (n = 43)")
     panel_letter(ax, "A")
     panel_title(ax, "Amplitude vs position")
     style_ax(ax)
@@ -396,7 +397,7 @@ def fig2():
     # direct labels for the two highlighted drugs (placed at their bin-1 peaks)
     ax.text(1.08, 0.128, "topotecan", color=BLUE, fontsize=8, va="bottom")
     ax.text(4.0, -0.150, "ANA-12", color=RED, fontsize=8, va="top", ha="right")
-    annotate_stats(ax, "Topotecan: bin 1 +0.125, bin 3 \u22120.136\nANA-12: bin 4 \u22120.165\nOther drugs weak (gray)",
+    annotate_stats(ax, "Topotecan (5 units): bin 1 +0.125, bin 3 \u22120.136\nANA-12 (3 units): bin 4 \u22120.165\nOther drugs weak (gray)",
                    x=0.02, y=0.03, ha="left", va="bottom", fontsize=7.5)
     panel_letter(ax, "E")
     panel_title(ax, "Per-drug transition profiles")
@@ -463,7 +464,7 @@ def fig3():
     ax.set_yticklabels(drugs, fontsize=7)
     ax.invert_yaxis()
     ax.set_xlabel("LODO shape Pearson r")
-    ax.set_title("v1 LODO shape \u2014 median r = 0.699\nnull 0.004, p = 0.0\nRMSE 0.0024 vs 0.0027 (p = 0.652)\nMagnitude 0.0234 vs 0.0222 (p = 0.578)",
+    ax.set_title("v1 LODO shape \u2014 median r = 0.699\nnull 0.004, p < 0.002\nRMSE 0.0024 vs 0.0027 (p = 0.652)\nMagnitude 0.0234 vs 0.0222 (p = 0.578)",
                  fontsize=7.5, pad=4, loc="left")
     style_ax(ax)
 
@@ -517,7 +518,7 @@ def fig3():
     ax.set_xlabel("Late-score tertile")
     ax.set_ylabel("Amplitude (m12)")
     annotate_stats(ax, "Expected m12\n0.038 / 0.071 / 0.093\nK-W p = 0.0066 (comp.)\np = 0.0285 (per-tissue)",
-                   x=0.02, y=0.03, ha="left", va="bottom", fontsize=7.5)
+                   x=0.30, y=0.97, ha="left", va="top", fontsize=7.5)
     panel_letter(ax, "C")
     panel_title(ax, "v3 strata")
     style_ax(ax)
@@ -617,26 +618,30 @@ def fig4():
     panel_title(ax, "Myeloid state shift is real")
     style_ax(ax)
 
-    # (C) per-drug centroid ratios — LEGEND values (per-TissueID CSV has no drug column)
+    # (C) per-drug pooled centroid distances — read from the deposited CSV
+    # (myeloid_per_drug_centroid_distances.csv). These are DISTANCES in
+    # z-scored myeloid gene space, pooled across TissueIDs — NOT ratios;
+    # the "ratio" label in the first draft was wrong (see FIGURES_README).
     ax = fig.add_subplot(gs[1, 0:2])
-    drugs = ["topotecan", "panobinostat", "rsl3_ferrostatin", "givinostat",
-             "ANA-12", "RO4929097"]
-    ratios = [2.232, 1.998, 1.680, 1.590, 1.094, 1.040]
-    cols = [BLUE if r > 1.5 else (BLUE2 if r > 1.2 else GRAY) for r in ratios]
-    ax.barh(np.arange(len(drugs)), ratios, height=0.62, color=cols,
+    pdd = load_csv(P1, "colab_outputs/myeloid_per_drug_centroid_distances.csv")
+    pdd = pdd.sort_values("pooled_centroid_distance", ascending=False)
+    drugs = pdd["drug"].tolist()
+    dists = pdd["pooled_centroid_distance"].tolist()
+    units = pdd["n_units"].tolist()
+    cols = [BLUE if d > 1.5 else (BLUE2 if d > 1.2 else GRAY) for d in dists]
+    ax.barh(np.arange(len(drugs)), dists, height=0.62, color=cols,
             edgecolor="black", linewidth=0.7)
-    ax.axvline(1.0, color=RED, lw=1.0, ls="--")
     ax.set_yticks(np.arange(len(drugs)))
-    ax.set_yticklabels(drugs, fontsize=8)
+    ax.set_yticklabels([f"{d} ({u} units)" for d, u in zip(drugs, units)], fontsize=8)
     ax.invert_yaxis()
-    ax.set_xlabel("Centroid shift / null (ratio)")
-    for i, v in enumerate(ratios):
+    ax.set_xlabel("Pooled centroid distance (z-scored gene space)")
+    for i, v in enumerate(dists):
         ax.text(v + 0.04, i, f"{v:.3f}", va="center", fontsize=8)
     ax.set_xlim(0, 2.6)
     annotate_stats(ax, "Direction inconsistent:\nmean pairwise Spearman 0.105",
                    x=0.98, y=0.03, ha="right", va="bottom", fontsize=7.5)
     panel_letter(ax, "C")
-    panel_title(ax, "Per-drug centroid ratios")
+    panel_title(ax, "Per-drug centroid distances")
     style_ax(ax)
 
     # (D) ligand vs TRAJECTORY (+ inset: shift vs amplitude)
@@ -738,10 +743,10 @@ def fig5():
     ax.set_xticks(x)
     ax.set_xticklabels(short)
     ax.set_ylabel("Ligand-positive fraction")
-    ax.set_ylim(0, 1.05)
+    ax.set_ylim(0, 1.20)
     ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.02), handlelength=1.0,
               fontsize=7, ncol=3)
-    annotate_stats(ax, "VEGFA+ in MES-like 2: 92.2% vs 22\u201359% others (p = 4.5$\\times$10$^{-7}$)\nVEGFA+ higher mes2 in 16/16 (median +0.20, p = 3.1$\\times$10$^{-5}$)\nVCAN p = 0.27, ANXA1 p = 0.46", fontsize=7)
+    annotate_stats(ax, "VEGFA+ in MES-like 2: 92.2% vs 22\u201359% others (p = 4.5$\\times$10$^{-7}$)\nVEGFA+ higher mes2 in 16/16 (median +0.20, p = 3.1$\\times$10$^{-5}$); VCAN p = 0.27, ANXA1 p = 0.46", fontsize=7)
     panel_letter(ax, "B")
     panel_title(ax, "Ligand zoning by tumor state")
     style_ax(ax)
@@ -865,7 +870,7 @@ def fig6():
     ax.axhline(0, color="black", lw=0.8)
     ax.set_xlim(-0.5, 0.5)
     ax.set_xticks([])
-    ax.set_xlabel("Section (n = 14)")
+    ax.set_xlabel("Sections (n = 14, unordered)")
     ax.set_ylabel("MM2 score diff (VEGFA+ \u2212 VEGFA\u2212)")
     annotate_stats(ax, "14/14 sections\nMedian diff +0.365\np = 0.00012", x=0.98, y=0.03, ha="right", va="bottom", fontsize=7.5)
     panel_letter(ax, "C")
@@ -878,7 +883,7 @@ def fig6():
     x = np.arange(len(xf))
     ax.plot(x, neg, "o-", color=GRAY, lw=0.9, ms=3, label="VEGFA\u2212", alpha=0.8)
     ax.plot(x, pos, "o-", color=RED, lw=1.2, ms=3, label="VEGFA+")
-    ax.set_xlabel("Section (n = 14)")
+    ax.set_xlabel("Section (n = 14, file order)")
     ax.set_ylabel("MM2-positive fraction")
     ax.set_ylim(0, 1.0)
     annotate_stats(ax, "Median 62.8% vs 36.5%",
@@ -954,6 +959,10 @@ def fig7():
     Xc = X - X.mean(axis=0)
     _, s, vt = np.linalg.svd(Xc, full_matrices=False)
     pc1 = Xc @ vt[0]
+    # PC1 sign is arbitrary (SVD convention); orient it to correlate
+    # positively with TRAJ so the figure agrees with the text (|rho| = 0.979).
+    if stats.spearmanr(traj[ist], pc1).statistic < 0:
+        pc1 = -pc1
     pc1_var = float(s[0] ** 2 / (s ** 2).sum())
     rho_pc1 = stats.spearmanr(traj[ist], pc1)
 
