@@ -1,0 +1,123 @@
+{
+  "module": "GBM drug-response module v3 (stratified)",
+  "amplitude_rule": "tertile stratum mean predicts a tissue AVERAGE amplitude across drugs (unit-level LOPO validated); it does NOT predict a single drug amplitude in a tissue (comparison-level LOPO p=0.23)",
+  "late_score_definition": "mean of S10 module scores MM2 (Gliosis-hypoxia) + MM3 (AC-gliosis-like 2) + MM5 (AC-gliosis-like 1) in vehicle-arm tumor cells (scanpy score_genes on log-normalized counts)",
+  "strata": [
+    {
+      "name": "low",
+      "late_score_range": [
+        null,
+        0.06185584276419711
+      ],
+      "expected_m12": 0.0384,
+      "sd_m12": 0.0135,
+      "n_comparisons": 9,
+      "n_tissues": 7,
+      "mean_myeloid_ligand": 0.172
+    },
+    {
+      "name": "mid",
+      "late_score_range": [
+        -0.013400693317052377,
+        0.06185584276419711
+      ],
+      "expected_m12": 0.071,
+      "sd_m12": 0.0354,
+      "n_comparisons": 13,
+      "n_tissues": 6,
+      "mean_myeloid_ligand": 0.5
+    },
+    {
+      "name": "high",
+      "late_score_range": [
+        -0.013400693317052377,
+        null
+      ],
+      "expected_m12": 0.0929,
+      "sd_m12": 0.0727,
+      "n_comparisons": 21,
+      "n_tissues": 6,
+      "mean_myeloid_ligand": 0.691
+    }
+  ],
+  "drugs": {
+    "ANA-12": {
+      "mean_m12": 0.1099,
+      "n": 3,
+      "slope_per_quintile": 0.00014,
+      "lodo_pearson": -0.1,
+      "shape_reliable": false
+    },
+    "RO4929097": {
+      "mean_m12": 0.0921,
+      "n": 3,
+      "slope_per_quintile": -0.00148,
+      "lodo_pearson": 0.699,
+      "shape_reliable": true
+    },
+    "etoposide": {
+      "mean_m12": 0.0516,
+      "n": 6,
+      "slope_per_quintile": 4e-05,
+      "lodo_pearson": -0.055,
+      "shape_reliable": false
+    },
+    "givinostat": {
+      "mean_m12": 0.0284,
+      "n": 4,
+      "slope_per_quintile": -0.00217,
+      "lodo_pearson": 0.879,
+      "shape_reliable": true
+    },
+    "ispinesib": {
+      "mean_m12": 0.0915,
+      "n": 5,
+      "slope_per_quintile": -0.00167,
+      "lodo_pearson": 0.669,
+      "shape_reliable": true
+    },
+    "panobinostat": {
+      "mean_m12": 0.0695,
+      "n": 6,
+      "slope_per_quintile": -0.00158,
+      "lodo_pearson": 0.824,
+      "shape_reliable": true
+    },
+    "rsl3": {
+      "mean_m12": 0.0807,
+      "n": 8,
+      "slope_per_quintile": 0.00059,
+      "lodo_pearson": -0.297,
+      "shape_reliable": false
+    },
+    "rsl3_ferrostatin": {
+      "mean_m12": 0.0384,
+      "n": 3,
+      "slope_per_quintile": -0.00065,
+      "lodo_pearson": 0.836,
+      "shape_reliable": true
+    },
+    "topotecan": {
+      "mean_m12": 0.1109,
+      "n": 5,
+      "slope_per_quintile": -0.00305,
+      "lodo_pearson": 0.916,
+      "shape_reliable": true
+    }
+  },
+  "direction_rule": "displacement is toward early trajectory states; later cells displace more (Point 1: pooled rho=-0.242, bin means rho=-0.894). Per-drug shape = population slope; reliability flag = LODO Pearson per drug.",
+  "myeloid_annotation": "high-late stratum = high myeloid ligand niche (VEGFA/VCAN/ANXA1; Point 3 ligand-trajectory rho=0.92). Annotation only, not a second predictor (collinear with late score).",
+  "validation": {
+    "loocv_n_comparisons": 43,
+    "loocv_n_tissues": 19,
+    "rmse_global_null": 0.0584,
+    "rmse_drugmean_null": 0.0595,
+    "rmse_stratum": 0.0559,
+    "rmse_linear": 0.0576,
+    "rmse_additive": 0.0676,
+    "wilcoxon_vs_global_p": 0.2308,
+    "wilcoxon_vs_drugmean_p": 0.4976,
+    "unit_level_stratum_vs_global_p": 0.0301,
+    "verdict": "PARTIAL (tissue-level)"
+  }
+}

@@ -1,0 +1,19 @@
+# Data and environment files (large raw data are downloaded separately; see README)
+*.h5ad
+*.loom
+*.rds
+*.h5
+*.parquet.gz
+*.tar
+*.tar.gz
+*.mtx.gz
+*.tsv.gz
+*.npz
+venv/
+colab-cli-venv/
+__pycache__/
+.ipynb_checkpoints/
+*.log
+*.err
+*.out
+.DS_Store
