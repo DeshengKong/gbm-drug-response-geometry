@@ -1,0 +1,34 @@
+pair,primary_gsm_assay,recurrent_gsm_assay,status,exclusion_reason,notes
+#1,GSM5319575 (snRNA),GSM5319534 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#2,GSM5319585 (snATAC),GSM5319556 (snRNA); GSM5319581 (snATAC),EXCLUDED,"EXCLUDED: primary side has snATAC only (GSM5319585, SF6996); no primary snRNA exists. Original count miscounted snATAC as snRNA.",
+#8,GSM5319580 (snATAC),GSM5319554 (snRNA); GSM5319579 (snATAC),EXCLUDED,"EXCLUDED: primary side has snATAC only (GSM5319580, SF4297); no primary snRNA exists. Original count miscounted snATAC as snRNA.",
+#9,GSM5319503 (snRNA),GSM5319536 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#10,GSM5319525 (snRNA),GSM5319566 (snRNA) [NOT PICKED]; GSM6199409 (snRNA) [CODE PICK],INCLUDED,Included in final 29-pair analysis.,Double Recurrent snRNA: same specimen re-sequenced (v2). Code picks the v2 GSM; no memo justifies the choice. UNRESOLVED.
+#11,GSM5319526 (snRNA),GSM5319533 (snRNA) [NOT PICKED]; GSM6199405 (snRNA) [CODE PICK],INCLUDED,Included in final 29-pair analysis.,Double Recurrent snRNA: same specimen re-sequenced (v2). Code picks the v2 GSM; no memo justifies the choice. UNRESOLVED.
+#12,GSM5319509 (snRNA),GSM5319565 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#13,GSM5319541 (snRNA); GSM5319578 (snATAC),GSM5319561 (snRNA); GSM5319584 (snATAC),INCLUDED,Included in final 29-pair analysis.,GSM correction: primary snRNA is GSM5319541 (SF10592); the snATAC-only GSM5319578 (same specimen) was the original wrong GSM. Recurrent snRNA GSM5319561; snATAC GSM5319584 (same specimen SF11857) not used.
+#14,GSM5319522 (snRNA),GSM5319576 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#15,GSM5319527 (snRNA),GSM5319555 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#16,GSM5319530 (snRNA),GSM5319568 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#17,GSM5319528 (snRNA),GSM5319557 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#19,GSM5319504 (snRNA),GSM5319539 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#20,GSM5319531 (snRNA),GSM5319535 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#21,GSM5319524 (snRNA),GSM5319552 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#22,GSM5319523 (snRNA),GSM5319572 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#23,GSM5319508 (snRNA),GSM5319573 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#24,GSM5319513 (snRNA),GSM5319546 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#25,GSM5319518 (snRNA),GSM5319548 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#26,GSM5319517 (snRNA),GSM5319547 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#27,GSM5319519 (snRNA),GSM5319549 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#28,GSM5319506 (snRNA),GSM5319562 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#29,GSM5319521 (snRNA),GSM5319551 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#30,GSM5319511 (snRNA),GSM5319543 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#31,GSM5319510 (snRNA),GSM5319560 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#32,GSM5319520 (snRNA),GSM5319550 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#33,GSM5319529 (snRNA),GSM5319567 (snRNA),EXCLUDED,"EXCLUDED: primary snRNA GSM5319529 MTX truncated (header 4855174 entries, 4648193 present, shortfall 206981 = 4.3%; 1 malformed line); scipy mmread segfaults. Whole pair dropped.",
+#35,GSM5319505 (snRNA),GSM5319542 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#37,GSM5319559 (snRNA); GSM5319583 (snATAC),GSM5319532 (snRNA); GSM5319577 (snATAC),INCLUDED,Included in final 29-pair analysis.,"GSM correction (Phase A): snRNA vs snATAC per specimen unchanged (SF9798 snRNA GSM5319559 / snATAC GSM5319583; SF9494 snRNA GSM5319532 / snATAC GSM5319577). PRIMARY/RECURRENT SWAPPED 2026-11-09 per author A. Diaz (email 2026-10-09): SF9798 is primary, SF9494 is recurrent; the GEO progression annotations were reversed during metadata preparation. Previous table version had the roles reversed."
+#39,GSM6199404 (snRNA),GSM5319563 (snRNA) [PRIMARY ANALYSIS, first recurrence]; GSM5319574 (snRNA) [SENSITIVITY, second recurrence],INCLUDED,Included in final 29-pair analysis.,"Double Recurrent snRNA: TWO DIFFERENT specimens (SF12407 vs SF12754), not a re-run. Author A. Diaz (email 2026-10-09, Diaz Pair 36): SF12407 is the FIRST recurrence and SF12754 the SECOND recurrence of primary SF11873. USER DECISION 2026-11-09 (SWITCH): primary analysis uses GSM5319563 (SF12407, first recurrence); GSM5319574 (SF12754, second recurrence) is the sensitivity variant. File mapping: _s39_r3 files = SF12407 primary branch; _r3 main-run files = SF12754 sensitivity branch. Supersedes the 2026-11-09 08:37 KEEP decision and the _s39 sensitivity memo's roles. See wang_37_correction_r3.md."
+#40,GSM5319507 (snRNA),GSM5319545 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+#41,GSM5319514 (snRNA),GSM5319569 (snRNA),INCLUDED,Included in final 29-pair analysis.,
+NA,GSM5319512 (snRNA); GSM5319515 (snRNA); GSM5319516 (snRNA); GSM5319586 (snATAC); GSM6337072 (spatial-transcriptomics); GSM6337073 (spatial-transcriptomics),GSM5319538 (snRNA); GSM5319540 (snRNA); GSM5319544 (snRNA); GSM5319570 (snRNA); GSM5319571 (snRNA); GSM6199406 (snRNA); GSM6199407 (snRNA); GSM6199408 (snRNA); GSM6199410 (snRNA),EXCLUDED,"EXCLUDED: 'pair#=NA' is NOT one pair -- it is 15 unassigned samples (6 Primary, 9 Recurrent) with no confirmed pairing. Cannot form a pair; excluded as a group, not as a single pair.","NA breakdown: Primary 6 = 3 snRNA (GSM5319512, GSM5319515, GSM5319516) + 1 snATAC (GSM5319586) + 2 spatial-transcriptomics (GSM6337072, GSM6337073). Recurrent 9 = all snRNA (GSM5319538, GSM5319540, GSM5319544, GSM5319570, GSM5319571, GSM6199406, GSM6199407, GSM6199408, GSM6199410)."
